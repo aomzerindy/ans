@@ -470,28 +470,32 @@
       $(document).ready(function(){
         $(function(){
           $("#staff_pro_id").change(function(){
-              $.ajax({
-                  url: "ajax_auto.php",
-                  type: "POST",
-                  datatype: "json",
-                  data: 'staff_id='+$("#staff_pro_id").val(),
-                  success: function(result){
-                    var obj = jQuery.parseJSON(result);
-                    console.log(obj);
-                    // if(result == ''){
-                    //   $('input[type=text]').val('');
-                    // }else{
-                    //   $.each(result, function(key, inval){
-                    //     $("#staff_pro_id").val(inval["staff_id"]);
-                    //     $("#staff_pro_name").val(inval["fullname"]);
-                    //   });
-                    // }
-                  }
-              });
+
+            // console.log($("#staff_pro_id").val())
+                  $.ajax({
+                      url: "ajax_auto.php",
+                      type: "POST",
+                      data: 'staff_id=' +$("#staff_pro_id").val()
+                  })
+                  .success(function(result){
+                    // console.log(result);
+                    
+                    if(result == ''){
+                      $('input[type=text]').val('');
+                    }else{
+                      $.each(result, function(key, inval){
+                        $("#staff_pro_id").val(inval["staff_id"]);
+                        $("#staff_pro_name").val(inval["fullname"]);
+                      });
+                    }
+                  });
+            
             });
         });
       });
   </script>
+
+
     
     
     

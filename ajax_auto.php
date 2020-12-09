@@ -1,6 +1,5 @@
 <?php
-    require 'connectdb.php';
-
+    
     $strSQL = "SELECT * FROM staff WHERE staff_id = '".$_POST["staff_pro_id"]."' ";
     $objQuery = mysql_query($strSQL) or die (mysql_error());
     $intNumField = mysql_num_fields($objQuery);
@@ -14,7 +13,7 @@
         }
         array_push($resultArray,$arrCol);
     }
-    mysql_close($objConnect);
+    
     echo json_encode($resultArray);
 
 ?>
