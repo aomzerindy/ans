@@ -454,7 +454,7 @@
           </div>
         </div>
       </form>
-    </div>
+    </div>   
 
     <!-- Custom scripts for this template -->
     <script src="./libs/js/jquery-1.12.4.js"></script>

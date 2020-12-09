@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>การใช้ jQuery add และ remove textbox </title>
+<script
+  src="https://code.jquery.com/jquery-1.10.2.js"
+  integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo="
+  crossorigin="anonymous"></script>
+
+
+ <style type="text/css">
+ div{
+  padding:8px;
+ }
+</style>
+
+</head>
+
+<body>
+
+<h1>การใช้ jQuery add  และ remove textbox รายรับ-รายจ่าย</h1>
+
+<script type="text/javascript">  //ส่วนของ jquery script
+
+$(document).ready(function(){
+
+    var counter = 2;
+
+    $("#addButton").click(function () {
+
+ if(counter>10){
+            alert("Only 10 textboxes allow");
+            return false;
+ }   
+
+ var newTextBoxDiv = $(document.createElement('div'))
+      .attr("id", 'TextBoxDiv' + counter);
+
+ newTextBoxDiv.after().html('<label>Textbox #'+ counter + ' : </label>' +
+       '<input type="text" name="textbox' + counter + 
+       '" id="textbox' + counter + '" value="" ><label>Text #'+ counter + ' : </label>' +
+       '<input type="text" name="text' + counter + 
+       '" id="text' + counter + '" value="" ><label>select #'+ counter + ' : </label>' +
+     '<select id="select'+counter+'"><option value="1">เงินในกระเป๋า</option><option value="2">เงินในบัญชี</option></select>');
+
+ newTextBoxDiv.appendTo("#TextBoxesGroup");
+
+
+ counter++;
+     });
+
+     $("#removeButton").click(function () {
+ if(counter==1){
+          alert("No more textbox to remove");
+          return false;
+       }   
+
+ counter--;
+
+        $("#TextBoxDiv" + counter).remove();
+
+     });
+
+     $("#getButtonValue").click(function () {
+
+ var msg = '';
+ for(i=1; i<counter; i++){
+      msg += "\n Textbox #" + i + " : " + $('#textbox' + i).val();
+ }
+       alert(msg);
+     });
+  });
+</script>
+</head><body>
+
+<div id='TextBoxesGroup'> //การนำมาใช้งานกับการคลิกต่างๆ
+ <div id="TextBoxDiv1">
+  <label>Textbox #1 : </label><input type='textbox' id='textbox1' value="" >
+        <label>Text #1 : </label><input type='textbox' id='text1' value="" >
+        <label>select #1 : </label>
+    <select id="select1">
+    <option value="1">เงินในกระเป๋า</option>
+     <option value="1">เงินในบัญชี</option>
+    </select>
+ </div>
+</div>
+<input type='button' value='Add Button' id='addButton'>
+<input type='button' value='Remove Button' id='removeButton'>
+<input type='button' value='Get TextBox Value' id='getButtonValue'>
+
+</body>
+</html>
