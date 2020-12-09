@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Form</title>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-1.10.2.js"
+      integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Font Awesome Icons -->
+    <link href="vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>รายงานผลการตรวจสอบความขัดแย้งทางผลประโยชน์</h1>
+
+    <div id="input" class="container">
+      <form id="form-input">
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>เลขที่&nbsp;ออนซ.</p>
+          </div>
+          <div class="col-3 column-box">
+            <input
+              type="text"
+              id="aans-id"
+              name="aans_id"
+              class="form-control"
+              maxlength="10"
+              placeholder="กรอกตัวเลข"
+              require
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>ตรวจสอบข้อมูล<br />ในระบบ SAP</p>
+          </div>
+          <div class="col-3 column-box">
+            <input type="date" id="sap-date" name="sap_date"  placeholder="dd-mm-yyyy" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>เลขที่</p>
+          </div>
+          <!-- เดี๋ยวจะวน loop ดึงจาก DB -->
+          <div class="col-4 column-box">
+            <select class="form-control" name="category" required>
+
+              <option value="" disabled selected>--กรุณาเลือก--</option>
+              <option value="1">ใบขอเสนอซื้อ</option>
+              <option value="2">สัญญา</option>
+
+            </select>
+            <!-- <input type="text" class="form-control" disabled size="10"> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3"></div>
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              id="order-id"
+              name="order_id"
+              class="form-control"
+              maxlength="10"
+              placeholder="กรอกตัวเลข"
+            />
+          </div>
+          <div class="col-4 column-box">
+            <input type="date" id="order-date" name="order_date" class="form-control" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>การจัดหาโดยวิธี</p>
+          </div>
+          <!-- เดี๋ยวจะ loop ดึงค่ามาจาก DB -->
+          <div class="col-4 column-box">
+            <select class="form-control" name="procurement" required >
+              <option value="" disabled selected>--กรุณาเลือก--</option>
+              <option value="นาย">เชิญชวนเฉพาะ</option>
+              <option value="นาง">เชิญชวนทั่วไป</option>
+              <option value="นางสาว">ประกวดราคา</option>
+              <option value="อื่นๆ">คัดเลือก</option>
+              <option value="อื่นๆ">ตกลงราคา</option>
+              <option value="อื่นๆ">เฉพาะเจาะจง</option>
+              <option value="อื่นๆ">พิเศษ</option>
+            </select>
+            <!-- <input type="text" class="form-control" disabled size="10"> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>ชื่องาน</p>
+          </div>
+          <div class="col-8 column-box">
+            <textarea
+              rows="5"
+              id="title_work"
+              name="title"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>อ้างถึงคำสั่ง</p>
+          </div>
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="refer-id"
+              name="refer_id"
+              class="form-control"
+              maxlength="10"
+              placeholder="กรอกตัวเลข"
+            />
+          </div>
+          <!-- ดึงจาก DB เอา -->
+          <div class="col-2 column-box">
+            <select class="form-control" id="refer-year" name="refer_year">
+              <option value="">2560</option>
+          
+            </select>
+          </div>
+          <div class="col-3 column-box">
+            <input type="date" id="refer-date" name="refer_date" class="form-control" />
+          </div>
+          <!-- <div class="col-1 btn" >
+            <button type="button" class="bg-box border-0" value="Add Button" id="addButton-memo-ans">
+              <i class="fas fa-2x fa-plus-circle btn btn-add"></i>
+            </button>
+            <button type="button" class="bg-box border-0" value="Remove Button" id="removeButton-memo-ans">
+              <i class="fas fa-2x fa-times-circle btn btn-remove"></i>
+            </button>
+          </div> -->
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>รายนามคณะกรรมการ<br /><u>จัดจ้าง/จัดหา</u></p>
+          </div>
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-pro-id"
+              name="staff_pro_id"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-pro-name"
+              name="staff_pro_name"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>ประธาน</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <br />
+          </div>
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-pro-id2"
+              name="staff_pro_id2"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-pro-name2"
+              name="staff_pro_name2"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>กรรมการ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name"></div>
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-pro-id3"
+              name="staff_pro_id3"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-pro-name3"
+              name="staff_pro_name3"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>กรรมการ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name">
+            <p>รายนามคณะกรรมการ<br /><u>ตรวจรับ</u></p>
+          </div>
+
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-prov-id"
+              name="staff_prov_id"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-prov-name"
+              name="staff_prov_name"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>ประธาน</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name"></div>
+
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-prov-id2"
+              name="staff_prov_id2"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-prov-name2"
+              name="staff_prov_name2"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>กรรมการ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3 column-name"></div>
+
+          <div class="col-2 column-box">
+            <input
+              type="text"
+              id="staff-prov-id3"
+              name="staff_prov_id3"
+              class="form-control"
+              maxlength="8"
+              placeholder="รหัสพนักงาน"
+            />
+          </div>
+
+          <!-- ดึงรายชื่อมาจาก DB ตามรหัสพนักงานที่กรอก -->
+          <div class="col-4 column-box">
+            <input
+              type="text"
+              class="form-control"
+              id="staff-prov-name3"
+              name="staff_prov_name3"
+              placeholder="ชื่อ-นามสกุล"
+            />
+          </div>
+          <div class="col-2 column-name">
+            <p>กรรมการ</p>
+          </div>
+        </div>
+        <div id="TextBoxesGroup-TOT">
+          <div class="row">
+            <div class="col-3 column-name">
+              <p>
+                อ้างถึง บันทึกเลขที่<br />
+                ทีโอที
+              </p>
+            </div>
+            <div class="col-2 column-box">
+              <input
+                type="text"
+                id="memo-tot-id"
+                class="form-control"
+                maxlength="8"
+                placeholder="กรอกตัวเลข"
+              />
+            </div>
+            <div class="col-3 column-box">
+              <input type="date" id="memo-tot-date" class="form-control" />
+            </div>
+            <div class="col-2 btn" >
+              <button type="button" class="bg-box border-0" value="Add Button" id="addButton-memo-tot">
+                <i class="fas fa-2x fa-plus-circle btn btn-add"></i>
+              </button>
+              <button type="button" class="bg-box border-0" value="Remove Button" id="removeButton-memo-tot">
+                <i class="fas fa-2x fa-times-circle btn btn-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="TextBoxesGroup-ANS">
+          <div class="row">
+            <div class="col-3 column-name">
+              <p>
+                อ้างถึง บันทึกเลขที่<br />
+                ทีโอที อนซ.
+              </p>
+            </div>
+            <div class="col-2 column-box" >
+              <input
+                type="text"
+                id="memo-ans-id"
+                class="form-control"
+                maxlength="10"
+                placeholder="กรอกตัวเลข"
+                value=""
+              />
+            </div>
+            <div class="col-3 column-box">
+              <input type="date" id="memo-ans-date" class="form-control" value="" />
+            </div>
+            <div class="col-2 btn" >
+              <button type="button" class="bg-box border-0" value="Add Button" id="addButton-memo-ans">
+                <i class="fas fa-2x fa-plus-circle btn btn-add"></i>
+              </button>
+              <button type="button" class="bg-box border-0" value="Remove Button" id="removeButton-memo-ans">
+                <i class="fas fa-2x fa-times-circle btn btn-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-3 column-name">
+            <p><u>หมายเหตุ</u></p>
+          </div>
+          <div class="col-8 column-box">
+            <textarea
+              id="description"
+              rows="3"
+              name="description-work"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col btn">
+            <input type='button' value='Get TextBox Value' id='getButtonValue'>
+            <input type="reset" class="btn btn-warning" value="reset" />
+
+            <input type="submit" class="btn btn-success" value="Submit" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Custom scripts for this template -->
+    <script src="./libs/js/add_removeButton-ANS.js"></script>
+    <script src="./libs/js/add_removeButton-TOT.js"></script>
+  </body>
+</html>
