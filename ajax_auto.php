@@ -1,19 +1,24 @@
 <?php
-    
-    $strSQL = "SELECT * FROM staff WHERE staff_id = '".$_POST["staff_pro_id"]."' ";
-    $objQuery = mysql_query($strSQL) or die (mysql_error());
-    $intNumField = mysql_num_fields($objQuery);
-    $resultArray = array();
-    while($obResult = mysql_fetch_array($objQuery))
-    {
-        $arrCol = array();
-        for($i=0;$i<$intNumField;$i++)
-        {
-            $arrCol[mysql_field_name($objQuery,$i)] = $obResult[$i];
+    include 'connectdb.php';
+?>
+<?php
+    $id = $_POST["staff_id"];
+    $strSQL = "SELECT * FROM staff WHERE staff_id = '$id' ";
+    if($result = mysqli_query($dbcon,$strSQL)){
+        $resultArray = array();
+        while($obResult = mysqli_fetch_assoc($result)){
+            $arrCol = array();
+            
+            $staff_id = $obResult["staff_id"];
+            $fullname = $obResult["fullname"];
+
+            $arrCol["staff_id"] = $staff_id;
+            $arrCol["fullname"] = $fullname;
+
+            array_push($resultArray,$arrCol);
         }
-        array_push($resultArray,$arrCol);
+
+        echo json_encode($resultArray);
     }
     
-    echo json_encode($resultArray);
-
 ?>
